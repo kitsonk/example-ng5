@@ -1,0 +1,58 @@
+{
+  // Change the default timeout
+  "defaultTimeout": 5000,
+
+  // Load the webpack bundles that have been built with the tests in them
+  "browser": {
+    "suites": [
+      "output/testing/inline.bundle.js",
+      "output/testing/polyfills.bundle.js",
+      "output/testing/styles.bundle.js",
+      "output/testing/vendor.bundle.js",
+      "output/testing/main.bundle.js"
+    ]
+  },
+
+  // Specifying the functional suites
+  "functionalSuites": [
+    "output/e2e/**/*-spec.js"
+  ],
+
+  "configs": {
+
+    "coverage": {
+      "coverage": [
+        // Only instrument the one bundle which contains the application code, for efficiency purposes
+        "output/testing/main.bundle.js"
+      ],
+      "reporters+": [ "htmlcoverage", "jsoncoverage" ]
+    },
+
+    "local": {
+      "extends": [ "pretty", "wdcoverage" ]
+    },
+
+    "plain": {
+      "reporters": [ "runner" ]
+    },
+
+    "pretty": {
+      "reporters": [ "pretty" ]
+    },
+
+    "wd": {
+      "tunnel": "selenium",
+      "tunnelOptions": {
+        "drivers": [
+          // Version 65 of chrome had breaking change for the webdriver, so forcing the approriate version
+          { "name": "chrome", "version": "2.36" }
+        ]
+      },
+      "environments": { "browserName": "chrome", "fixSessionCapabilities": "no-detect" }
+    },
+
+    "wdcoverage": {
+      "extends": [ "wd", "coverage" ]
+    }
+  }
+}

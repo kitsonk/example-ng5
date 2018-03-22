@@ -5,15 +5,12 @@
     "baseUrl": "./",
     "module": "commonjs",
     "types": [
-      "jasmine",
+      "intern",
+      "sinon-chai",
       "node"
     ]
   },
-  "files": [
-    "test.ts"
-  ],
   "include": [
-    "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.ts"
   ]
 }
